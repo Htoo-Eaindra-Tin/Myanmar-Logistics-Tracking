@@ -112,6 +112,19 @@ The person transporting the shipment.
 
 ## 6. User Roles and Permissions
 
+| Feature | Admin | Trader | Driver |
+| :--- | :---: | :---: | :---: |
+| **View all shipments** | Yes | No | No |
+| **View own shipments** | Yes | Yes | Assigned only |
+| **Create shipment** | Yes | Yes | No |
+| **Update shipment status** | Yes | No | Yes |
+| **Update location** | Yes | No | Yes |
+| **View map** | Yes | Yes | Yes |
+| **Manage routes** | Yes | No | No |
+| **Close/open route** | Yes | No | No |
+| **Receive alerts** | Yes | Yes | Yes |
+| **Upload documents** | Yes | No | Yes |
+| **Offline updates** | No | No | Yes |
 
 ---
 
