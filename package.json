@@ -1,0 +1,8 @@
+{
+  "name": "myanmar-logistics-monitoring",
+  "private": true,
+  "scripts": {
+    "dev:web": "npm --prefix apps/admin-web run dev",
+    "dev:mobile": "npm --prefix apps/mobile run start"
+  }
+}
