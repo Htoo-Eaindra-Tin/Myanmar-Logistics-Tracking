@@ -1,27 +1,88 @@
-# Myanmar-Logistics-Tracking
-LLM-assisted rapid prototype for real-time logistics monitoring and tracking in Myanmar.
+# Myanmar Logistics Monitoring
 
----
+Prototype monorepo for the AIE-F B2 Assignment 5: a Next.js admin/trader web app, a React Native/Expo driver app, and a Supabase PostgreSQL backend.
 
-- Notes, Design decisions, prompt logs, or general instructions များကို ```/docs``` ထဲတွင် ကြည့်ရှုနိုင်သည်။
+## Architecture
 
----
+- `apps/admin-web` — Next.js web app for Admin + Trader roles
+- `apps/mobile` — Expo React Native app for Driver role
+- `supabase/schema.sql` — PostgreSQL schema, RLS policies, helper functions and demo seed data
+- `docs/prd.md` — supplied product requirements
 
-## Database
+The implementation follows the supplied PRD: role-based access, shipment lifecycle, simulated GPS, Leaflet/OpenStreetMap tracking, route closure alerts, realtime updates, offline driver queue simulation, and document metadata.
 
-- **Database Name**: Supabase
+## Quick start
 
-- **Database Type**: PostgreSQL
+### 1. Supabase
 
-- **Purpose**: To help developers build modern web and mobile applications rapidly by providing managed backend infrastructure, removing the need to manually build APIs, write server code, or handle complex database administration
+Create a Supabase project and run `supabase/schema.sql` in the SQL editor. Then create three Auth users matching the demo profiles in the seed section (or sign up normally and update their profile roles).
 
-<br>
+Set environment variables in `apps/admin-web/.env.local`:
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/9d789057-52d3-4540-af9a-caf3b14e8744" width="250" height="150" />
-</p>
+```env
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+```
 
-<br>
+For the mobile app, put the same values in `apps/mobile/.env` as `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY`.
 
----
+### 2. Web
 
+```bash
+cd apps/admin-web
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000/login`.
+
+### 3. Mobile
+
+```bash
+cd apps/mobile
+npm install
+npx expo start
+```
+
+The mobile app contains the Driver flow and a simulated offline mode.
+
+## Demo scenario
+
+Use shipment `MYT-2026-001`: Yangon → Muse, driver Aung Aung. Move the simulated truck through Yangon → Mandalay → Lashio, close the Muse route from Admin, observe the alert, switch the Driver to offline mode, create a pending checkpoint update, then reconnect and synchronize.
+
+## Demo mode (no Supabase required)
+
+The prototype now runs with local demo data, so Supabase is optional until you are ready to connect a database.
+
+### Temporary web users
+
+- Admin: `admin@example.com` / `admin123`
+- Trader: `trader@example.com` / `trader123`
+
+The web app stores demo users, shipments, events, routes, and alerts in browser localStorage.
+
+### Temporary mobile user
+
+- Driver: `driver@example.com` / `driver123`
+
+The Expo app stores the demo shipment and offline queue in AsyncStorage.
+
+### Run web
+
+```bash
+cd apps/admin-web
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000/login`.
+
+### Run mobile
+
+```bash
+cd apps/mobile
+npm install
+npx expo start
+```
+
+Supabase environment variables are not required in demo mode. When Supabase is added later, populate the environment files using the examples in each app.
