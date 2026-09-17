@@ -1,6 +1,10 @@
 # Myanmar Logistics Monitoring
 
-Prototype monorepo for the AIE-F B2 Assignment 5: a Next.js admin/trader web app, a React Native/Expo driver app, and a Supabase PostgreSQL backend.
+Prototype monorepo for the AIE-F B2 Assignment 5: 
+
+- a Next.js admin/trader web app
+- a React Native/Expo driver app, and
+- a Supabase PostgreSQL backend.
 
 ## Architecture
 
